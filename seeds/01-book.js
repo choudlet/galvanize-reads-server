@@ -41,7 +41,7 @@ exports.seed = function(knex, Promise) {
                 }),
                 knex('book').insert({
                     id: 6,
-                    title: 'You Don\'t Know JS: Scope & Closures',
+                    title: 'You Don\'t Know JS: Async & Performance',
                     genre: 'JavaScript',
                     description: 'No matter how much experience you have with JavaScript, odds are you don’t fully understand the language. As part of the "You Don’t Know JS" series, this concise yet in-depth guide focuses on new asynchronous features and performance techniques—including Promises, generators, and Web Workers—that let you create sophisticated single-page web applications and escape callback hell in the process.',
                     cover_url: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/async_and_performance.jpg'
