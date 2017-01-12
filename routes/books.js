@@ -8,7 +8,6 @@ router.get('/', (req, res, next) => {
         .join('author', 'book_author.author_id', 'author.id')
         .then(bookData => {
         let bookList = bookFunctions.formatBookData(bookData);
-        console.log(bookList);
         res.json(bookList);
         });
 });
