@@ -41,7 +41,10 @@ router.post('/new', (req, res, next) => {
                 });
 
                 return Promise.all(promises).then(() => {
-                  res.send({status: 'Book Stored Correctly', success:true})
+                    res.send({
+                        status: 'Book Stored Correctly',
+                        success: true
+                    })
                 });
             });
 
@@ -50,25 +53,30 @@ router.post('/new', (req, res, next) => {
 
         } else res.send({
             status: 'Not valid Book Input',
-            success:false
+            success: false
         })
     })
 
 });
 
-router.get('/delete', (req,res,next)=>{
-  let id = req.query.id;
-  knex('book').select('*').where('book.id', id)
-  .join('book_author', 'book.id', '=', 'book_author.book_id')
-  .join('author', 'book_author.author_id', 'author.id')
-  .then(bookData=>{
-    let bookList = bookFunctions.formatBookData(bookData);
-    res.send(bookList);
-  })
+router.get('/delete', (req, res, next) => {
+    let id = req.query.id;
+    knex('book').select('*').where('book.id', id)
+        .join('book_author', 'book.id', '=', 'book_author.book_id')
+        .join('author', 'book_author.author_id', 'author.id')
+        .then(bookData => {
+            let bookList = bookFunctions.formatBookData(bookData);
+            res.send(bookList);
+        })
 });
 
-router.get('/delete/confirm', (req,res,next)=>{
-  let id = req.query.id;
-  knex('book').where('id', id).del().then(()=>{console.log('Deleted');});
+router.get('/delete/confirm', (req, res, next) => {
+    let id = req.query.id;
+    knex('book').where('id', id).del().then(() => {
+      console.log('cool');
+        res.send({
+            status: 'Deleted'
+        });
+    });
 })
 module.exports = router;
