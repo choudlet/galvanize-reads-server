@@ -78,5 +78,21 @@ router.get('/delete/confirm', (req, res, next) => {
             status: 'Deleted'
         });
     });
-})
+});
+
+router.get('/edit', (req, res, next) => {
+    let id = req.query.id;
+    knex('book').select('*').where('book.id', id)
+        .join('book_author', 'book.id', '=', 'book_author.book_id')
+        .join('author', 'book_author.author_id', 'author.id')
+        .then(bookData => {
+            let bookList = bookFunctions.formatBookData(bookData);
+            res.send(bookList);
+        })
+});
+
+router.put('/edit', (req, res, next)=>{
+  console.log(req.query);
+
+});
 module.exports = router;
